@@ -1,12 +1,14 @@
 const express = require("express");
-const path = require('path');
+const path = require("path");
 const praApp = express.Router();
-praApp.get('/test', (req,res)=> {
-  res.send('test success')
-})
-praApp.get("/", (req,res) => {
-  res.sendFile(path.join(__dirname+'/index.html'));
-});
 
+praApp.use(express.static(__dirname + "/client"));
+
+praApp.get("/test", (req, res) => {
+  res.send("prakrishth test success");
+});
+praApp.get("/", (req, res) => {
+  res.render(path.join(__dirname + "/client/index.html"));
+});
 
 module.exports = praApp;
