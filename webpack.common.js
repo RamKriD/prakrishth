@@ -2,7 +2,9 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
-const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 module.exports = {
   entry: {
@@ -15,6 +17,19 @@ module.exports = {
       showErrors: true,
       cache: true,
       template: path.join(__dirname, "/client/src", "index.html"),
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
     }),
     new WorkboxPlugin.GenerateSW({
       // these options encourage the ServiceWorkers to get in there fast
@@ -27,7 +42,35 @@ module.exports = {
       test: /\.(js|css|html|svg)$/,
       threshold: 10240,
       minRatio: 0.8,
-    })
+    }),
+    new MiniCssExtractPlugin(),
+    new WebpackPwaManifest({
+      filename: "manifest.json",
+      name: "Prakrishth",
+      short_name: "Prakrishth",
+      description: "Prakrishth",
+      background_color: "#ffffff",
+      theme_color: "#3367D6",
+      crossorigin: "use-credentials", //can be null, use-credentials or anonymous
+      icons: [
+        {
+          src: path.resolve("./client/public/images/prakrishth.png"),
+          sizes: [120, 152, 167, 180, 1024],
+          destination: path.join("icons"),
+          purpose: "any maskable",
+          ios: true
+        },
+      ],
+      orientation: "portrait",
+      display: "standalone",
+      start_url: ".",
+      inject: true,
+      fingerprints: true,
+      ios: false,
+      publicPath: null,
+      includeDirectory: true,
+      splash: null,
+    }),
   ],
   output: {
     filename: "[name].[contenthash].js",
@@ -38,6 +81,7 @@ module.exports = {
   optimization: {
     moduleIds: "deterministic",
     runtimeChunk: "single",
+    minimizer: [`...`, new CssMinimizerPlugin()],
     splitChunks: {
       cacheGroups: {
         vendor: {
@@ -52,14 +96,12 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"],
       },
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: "style-loader",
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
           },

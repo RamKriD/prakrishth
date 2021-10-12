@@ -6,5 +6,8 @@ module.exports = {
     "utils", // a utility folder
     __dirname + "/client/src", // the root directory
   ],
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    "^.+\\.(css|less|scss)$": "babel-jest"
+  }
 };

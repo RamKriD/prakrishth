@@ -1,25 +1,25 @@
 import React from "react";
-import { createTheme } from '@mui/material/styles';
-import { ThemeProvider } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 
-import './App.scss';
+import "./App.scss";
 
 const theme = createTheme({
   typography: {
     fontFamily: [
-      'PoppinsBold',
-      'Roboto',
+      "PoppinsBold",
+      "Roboto",
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif'
-    ].join(','),
-  }
+      "Arial",
+      "sans-serif",
+    ].join(","),
+  },
 });
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <h1>Prakrishth</h1>
+      <h1 className="header">Prakrishth</h1>
     </ThemeProvider>
   );
 }
