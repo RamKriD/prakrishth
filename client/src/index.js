@@ -1,8 +1,29 @@
-import _ from 'lodash';
-import './style.css';
-import Print from './print'; 
+import React from "react";
+import ReactDOM from "react-dom";
 
-if ('serviceWorker' in navigator) {
+import "./index.scss";
+
+import App from "./App";
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+
+
+if (process.env.NODE_ENV !== "production") {
+  console.log("Looks like we are in development mode!");
+} else if (
+  window &&
+  typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object"
+) {
+  window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};
+  __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function() {};
+}
+
+if (navigator && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js').then(registration => {
       console.log('SW registered: ', registration);
@@ -11,21 +32,3 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-
-function component() {
-  const element = document.createElement('div');
-  const btn = document.createElement('button');
-
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello Rambo', 'webpack'], ' ');
-  element.classList.add('hello');
-
-  btn.innerHTML = 'Click me and check the console!';
-  btn.onclick = Print.bind(null, 'Hello webpack!');
-
-  element.appendChild(btn)
-
-  return element;
-}
-
-document.body.appendChild(component());
