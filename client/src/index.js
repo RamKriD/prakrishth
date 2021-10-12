@@ -1,31 +1,13 @@
-import _ from 'lodash';
-import './style.css';
-import Print from './print'; 
+import React from "react";
+import ReactDOM from "react-dom";
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js').then(registration => {
-      console.log('SW registered: ', registration);
-    }).catch(registrationError => {
-      console.log('SW registration failed: ', registrationError);
-    });
-  });
-}
+import "./index.scss";
 
-function component() {
-  const element = document.createElement('div');
-  const btn = document.createElement('button');
+import App from "./App";
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello Rambo', 'webpack'], ' ');
-  element.classList.add('hello');
-
-  btn.innerHTML = 'Click me and check the console!';
-  btn.onclick = Print.bind(null, 'Hello webpack!');
-
-  element.appendChild(btn)
-
-  return element;
-}
-
-document.body.appendChild(component());
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
