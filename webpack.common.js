@@ -58,7 +58,7 @@ module.exports = {
           sizes: [120, 152, 167, 180, 1024],
           destination: path.join("icons"),
           purpose: "any maskable",
-          ios: true
+          ios: true,
         },
       ],
       orientation: "portrait",
