@@ -1,26 +1,14 @@
-import React from "react";
-import { createTheme } from "@mui/material/styles";
-import { ThemeProvider } from "@mui/material/styles";
+import React, { Fragment } from "react";
+
+import LandingPage from "./landing/LandingPage";
 
 import "./App.scss";
 
-const theme = createTheme({
-  typography: {
-    fontFamily: [
-      "PoppinsBold",
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-    ].join(","),
-  },
-});
-
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <h1 className="header">Prakrishth</h1>
-    </ThemeProvider>
+    <Fragment>
+      <LandingPage />
+    </Fragment>
   );
 }
 
