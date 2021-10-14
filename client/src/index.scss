@@ -1,14 +1,5 @@
-@font-face {
-  font-family: "PoppinsRegular";
-  src: url("./../public/fonts/Poppins-Regular.ttf");
-  font-style: normal;
-  font-size: 14px;
-}
-@font-face {
-  font-family: "PoppinsBold";
-  src: url("./../public/fonts/Poppins-Bold.ttf");
-  font-style: normal;
-}
+@use "./../public/css/fonts";
+@use "./../public/css/colors";
 
 body {
   margin: 0;
