@@ -23,6 +23,9 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { useAuth0 } from "@auth0/auth0-react";
+
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -61,6 +64,10 @@ function ScrollTop(props) {
 }
 
 export default function Header(props) {
+  const { loginWithRedirect } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { logout } = useAuth0();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
@@ -109,17 +116,6 @@ export default function Header(props) {
           </ListItem>
         ))}
       </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
     </div>
   );
 
@@ -127,7 +123,7 @@ export default function Header(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
+  const renderMenu = isAuthenticated ? (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -145,6 +141,45 @@ export default function Header(props) {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem
+        sx={{ ":hover": { textDecoration: "underline" } }}
+        onClick={() => {
+          logout({ returnTo: "http://localhost:5000"});
+        }}
+      >
+        Sign out
+      </MenuItem>
+    </Menu>
+  ) : (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem
+        sx={{ ":hover": { textDecoration: "underline" } }}
+        onClick={() => loginWithRedirect()}
+      >
+        Sign In
+      </MenuItem>
+      <MenuItem
+        component={Link}
+        to="/signup"
+        sx={{ ":hover": { textDecoration: "underline" } }}
+        onClick={handleMenuClose}
+      >
+        Sign Up
+      </MenuItem>
     </Menu>
   );
 
@@ -221,8 +256,14 @@ export default function Header(props) {
             <MenuIcon />
           </IconButton>
 
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            Prakrishth
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{ flexGrow: 1, textAlign: "right" }}
+          >
+            <IconButton component={Link} to="/" sx={{ color: "#000" }}>
+              Prakrishth
+            </IconButton>
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
