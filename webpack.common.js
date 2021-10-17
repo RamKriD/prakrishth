@@ -78,20 +78,6 @@ module.exports = {
     clean: true,
     publicPath: "/",
   },
-  optimization: {
-    moduleIds: "deterministic",
-    runtimeChunk: "single",
-    minimizer: [`...`, new CssMinimizerPlugin()],
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all",
-        },
-      },
-    },
-  },
   module: {
     rules: [
       {

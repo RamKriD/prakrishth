@@ -1,11 +1,18 @@
 const express = require("express");
 
-const praApp = express.Router();
+const port = process.env.port || 5000;
 
-praApp.use(express.static(__dirname + "/client/dist"));
+const baseApp = express();
 
-praApp.get("/test", (req, res) => {
-  res.send("prakrishth test success");
+baseApp.set('view engine', 'html');
+baseApp.engine('html', require('ejs').renderFile);
+
+baseApp.use(express.static(__dirname + "/client/dist"));
+
+baseApp.get("*", (req, res) => {
+  res.render(__dirname + "/client/dist/index");
 });
 
-module.exports = praApp;
+baseApp.listen(port, () => {
+  console.log("base app listening on port 5000");
+});
