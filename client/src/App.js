@@ -7,11 +7,12 @@ import {
 } from "react-router-dom";
 import Box from "@mui/material/Box";
 
-import "./App.scss";
-
 import LandingPage from "./layout/landing/LandingPage";
-
 import Header from "./layout/header/Header";
+import Profile from "./views/profile/Profile";
+import Account from "./views/account/Account";
+import Shashtrarth from "./views/shashtrarth/Shashtrarth";
+import Utkrishth from "./views/utkrishth/Utkrishth";
 
 function NoMatch() {
   let location = useLocation();
@@ -34,6 +35,18 @@ function App() {
           <Switch>
             <Route exact path="/">
               <LandingPage />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+            <Route exact path="/account">
+              <Account />
+            </Route>
+            <Route exact path="/shashtrarth">
+              <Shashtrarth />
+            </Route>
+            <Route exact path="/utkrishth">
+              <Utkrishth />
             </Route>
             <Route path="*">
               <NoMatch />
