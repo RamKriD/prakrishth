@@ -18,10 +18,8 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -64,7 +62,7 @@ function ScrollTop(props) {
 }
 
 export default function Header(props) {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, loginWithPopup } = useAuth0();
   const { user, isAuthenticated, isLoading } = useAuth0();
   const { logout } = useAuth0();
 
@@ -107,11 +105,14 @@ export default function Header(props) {
       />
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
+        {["Utkrishth", "Shashtrarth"].map((text, index) => (
+          <ListItem
+            button
+            key={index}
+            component={Link}
+            to={"/" + text.toLowerCase()}
+            sx={{ ":hover": { textDecoration: "underline" } }}
+          >
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -139,12 +140,26 @@ export default function Header(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem
+        component={Link}
+        to="/profile"
+        sx={{ ":hover": { textDecoration: "underline" } }}
+        onClick={handleMenuClose}
+      >
+        Profile
+      </MenuItem>
+      <MenuItem
+        component={Link}
+        to="/account"
+        sx={{ ":hover": { textDecoration: "underline" } }}
+        onClick={handleMenuClose}
+      >
+        My account
+      </MenuItem>
       <MenuItem
         sx={{ ":hover": { textDecoration: "underline" } }}
         onClick={() => {
-          logout({ returnTo: "http://localhost:5000"});
+          logout({ returnTo: "http://localhost:5000" });
         }}
       >
         Sign out
@@ -168,15 +183,13 @@ export default function Header(props) {
     >
       <MenuItem
         sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={() => loginWithRedirect()}
+        onClick={() => loginWithPopup()}
       >
         Sign In
       </MenuItem>
       <MenuItem
-        component={Link}
-        to="/signup"
         sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={handleMenuClose}
+        onClick={() => loginWithPopup({ screen_hint: 'signup', prompt:'login' })}
       >
         Sign Up
       </MenuItem>
