@@ -47,7 +47,7 @@
     "brotli-webpack-plugin": "^1.1.0",
     "css-loader": "^6.4.0",
     "css-minimizer-webpack-plugin": "^3.1.1",
-    "html-webpack-plugin": "^5.4.0",
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^27.3.1",
     "mini-css-extract-plugin": "^2.4.2",
     "sass": "^1.43.3",
