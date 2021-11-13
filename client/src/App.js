@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
   useLocation,
+  Redirect 
 } from "react-router-dom";
 import Box from "@mui/material/Box";
 
@@ -33,24 +34,13 @@ function App() {
         <Header />
         <Box component="main" sx={{ flexGrow: 1, p: 3, mt: "48px" }}>
           <Switch>
-            <Route exact path="/">
-              <LandingPage />
-            </Route>
-            <Route exact path="/profile">
-              <Profile />
-            </Route>
-            <Route exact path="/account">
-              <Account />
-            </Route>
-            <Route exact path="/shashtrarth">
-              <Shashtrarth />
-            </Route>
-            <Route exact path="/utkrishth">
-              <Utkrishth />
-            </Route>
-            <Route path="*">
-              <NoMatch />
-            </Route>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/prakrishth" render={() => (<Redirect to="/" />)} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/account" component={Account} />
+            <Route exact path="/shashtrarth" component={Shashtrarth} />
+            <Route exact path="/utkrishth" component={Utkrishth} />
+            <Route path="*" component={NoMatch} />
           </Switch>
         </Box>
       </Router>

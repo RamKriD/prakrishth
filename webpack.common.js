@@ -6,9 +6,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 module.exports = {
-  entry: {
-    app: path.join(__dirname, "/client/src", "index.js"),
-  },
+  entry: [
+    require.resolve("regenerator-runtime/runtime.js"),
+    path.join(__dirname, "/client/src", "index.js"),
+  ],
   plugins: [
     new HtmlWebpackPlugin({
       title: "Prakrishth",
@@ -79,6 +80,18 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        // Match files from the `ckeditor5` package but also `ckeditor5-*` packages.
+        test: /(ckeditor5(?:-[^\/\\]+)?)[\/\\].+\.js$/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [require("@babel/preset-env")],
+            },
+          },
+        ],
+      },
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"],

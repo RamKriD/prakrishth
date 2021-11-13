@@ -62,7 +62,7 @@ function ScrollTop(props) {
 }
 
 export default function Header(props) {
-  const { loginWithRedirect, loginWithPopup } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
   const { user, isAuthenticated, isLoading } = useAuth0();
   const { logout } = useAuth0();
 
@@ -105,7 +105,7 @@ export default function Header(props) {
       />
       <Divider />
       <List>
-        {["Utkrishth", "Shashtrarth"].map((text, index) => (
+        {["Prakrishth", "Utkrishth", "Shashtrarth"].map((text, index) => (
           <ListItem
             button
             key={index}
@@ -183,13 +183,13 @@ export default function Header(props) {
     >
       <MenuItem
         sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={() => loginWithPopup()}
+        onClick={() => loginWithRedirect()}
       >
         Sign In
       </MenuItem>
       <MenuItem
         sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={() => loginWithPopup({ screen_hint: 'signup', prompt:'login' })}
+        onClick={() => loginWithRedirect({ screen_hint: 'signup', prompt:'login' })}
       >
         Sign Up
       </MenuItem>

@@ -1,16 +1,16 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Shashtrarth(props) {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
-  console.log(user);
+  // if (isLoading) {
+  //   return <div>Loading ...</div>;
+  // }
   return (
-    
-    <h6>Shashtrarth</h6>
+    <div className="ck-content">
+      <InlineEditor data={user} isReadOnly={true} />
+    </div>
   );
 }
-
+ 
 export default Shashtrarth;

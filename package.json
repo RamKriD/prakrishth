@@ -20,9 +20,13 @@
     "url": "https://github.com/RamKriD/prakrishth/issues"
   },
   "homepage": "https://github.com/RamKriD/prakrishth#readme",
-  "packageManager": "yarn@3.0.2",
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
+    "@ckeditor/ckeditor5-autoformat": "^31.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^31.0.0",
+    "@ckeditor/ckeditor5-build-inline": "^31.0.0",
+    "@ckeditor/ckeditor5-image": "^31.0.0",
+    "@ckeditor/ckeditor5-link": "^31.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.3",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
@@ -30,9 +34,10 @@
     "@mui/material": "^5.0.4",
     "@mui/styled-engine-sc": "^5.0.3",
     "@mui/styles": "^5.0.1",
-    "ckeditor5-custom-build": "file:./ckeditor5",
+    "ckeditor-custom-build": "file:./ckeditor",
     "express": "^4.17.1",
     "lodash": "^4.17.21",
+    "mongodb": "^4.1.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
@@ -52,9 +57,16 @@
     "brotli-webpack-plugin": "^1.1.0",
     "css-loader": "^6.4.0",
     "css-minimizer-webpack-plugin": "^3.1.1",
+    "dotenv": "^10.0.0",
+    "grunt": "^1.4.1",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-exec": "^3.0.0",
     "html-webpack-plugin": "^5.4.0",
     "jest": "^27.3.1",
+    "jsonpointer": ">=5.0.0",
     "mini-css-extract-plugin": "^2.4.3",
+    "nodemon-webpack-plugin": "^4.5.2",
+    "regenerator-runtime": "^0.13.9",
     "sass": "^1.43.3",
     "sass-loader": "^12.2.0",
     "style-loader": "^3.3.1",
@@ -64,7 +76,6 @@
     "webpack-dev-middleware": "^5.2.1",
     "webpack-merge": "^5.8.0",
     "webpack-pwa-manifest": "^4.3.0",
-    "workbox-webpack-plugin": "^6.3.0",
-    "yarn": "^1.22.17"
+    "workbox-webpack-plugin": "^6.3.0"
   }
 }
