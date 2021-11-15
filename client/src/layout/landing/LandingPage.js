@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
+import client from './../../services/dataService'
+
 function LandingPage(props) {
   const { user, isAuthenticated, isLoading, getAccessTokenSilently,
     getAccessTokenWithPopup,
@@ -10,6 +12,23 @@ function LandingPage(props) {
   }
   if(isAuthenticated) {
     console.log(user);
+    client.post('/users/activeUser', {
+      data: {
+        query: `
+          query PostsForAuthor {
+            author(id: 1) {
+              firstName
+                posts {
+                  title
+                  votes
+                }
+              }
+            }
+          `
+      }
+    }).then((result) => {
+      console.log(result.data)
+    });
     getAccessTokenSilently().then(function(data) {
       console.log('accessToken')
       console.log(data)

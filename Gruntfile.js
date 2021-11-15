@@ -37,7 +37,6 @@ module.exports = (grunt) => {
   });
 
   grunt.registerTask("default", () => {
-    console.log(envConfig);
     if (envConfig.NODE_ENV === "development") {
       grunt.task.run(["clean", "exec:buildDev"]);
     } else if (envConfig.NODE_ENV === "production") {

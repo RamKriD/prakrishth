@@ -12,25 +12,54 @@ require("dotenv").config();
 
 /**
  * Routes Definitions
- */
+//  */
 router.get(
   "/login",
-  passport.authenticate("auth0", {
-    scope: "openid email profile",
-  }),
+  passport.authenticate("auth0"),
   (req, res) => {
-    res.redirect("/");
+    console.log("login redirect");
+    res.redirect(`https://${process.env.AUTH0_DOMAIN}/v2/login`);
   }
 );
 
-router.get("/callback", (req, res, next) => {
+
+router.get("/logout", (req, res) => {
+  req.logOut();
+
+  let returnTo = req.protocol + "://" + req.hostname;
+  const port = req.connection.localPort;
+  if (port !== undefined && port !== 80 && port !== 443) {
+    returnTo =
+      process.env.NODE_ENV === "production"
+        ? `${returnTo}/`
+        : `${returnTo}:${port}/`;
+  }
+
+  returnTo = returnTo + 'callback'
+  console.log(returnTo)
+  const logoutURL = new URL(`https://${process.env.AUTH0_DOMAIN}/v2/logout`);
+
+  const searchString = querystring.stringify({
+    client_id: process.env.AUTH0_CLIENT_ID,
+    returnTo: returnTo,
+  });
+  logoutURL.search = searchString;
+
+  res.redirect(logoutURL);
+});
+
+router.get("/", (req, res, next) => {
   passport.authenticate("auth0", (err, user, info) => {
+    console.log("callback");
+    console.log(user);
     if (err) {
       return next(err);
     }
     if (!user) {
-      return res.redirect("/login");
+      console.log("no user");
+      return res.redirect(`https://${process.env.AUTH0_DOMAIN}/api/v2/login`);
     }
+    console.log(err);
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
@@ -42,32 +71,7 @@ router.get("/callback", (req, res, next) => {
   })(req, res, next);
 });
 
-router.get("/logout", (req, res) => {
-  req.logOut();
-
-  let returnTo = req.protocol + "://" + req.hostname;
-  const port = req.connection.localPort;
-
-  if (port !== undefined && port !== 80 && port !== 443) {
-    returnTo =
-      process.env.NODE_ENV === "production"
-        ? `${returnTo}/`
-        : `${returnTo}:${port}/`;
-  }
-
-  const logoutURL = new URL(
-    `https://${process.env.AUTH0_DOMAIN}/v2/logout`
-  );
-
-  const searchString = querystring.stringify({
-    client_id: process.env.AUTH0_CLIENT_ID,
-    returnTo: returnTo
-  });
-  logoutURL.search = searchString;
-
-  res.redirect(logoutURL);
-});
-
 /**
  * Module Exports
  */
+module.exports = router;

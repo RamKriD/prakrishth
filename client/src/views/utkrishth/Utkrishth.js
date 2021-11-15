@@ -18,7 +18,7 @@ function Utkrishth(props) {
       </Fragment>
     );
   }
-  if (true) {
+  if (isAuthenticated) {
     return (
       <Fragment>
         <h3>Utkrishth</h3>

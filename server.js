@@ -8,8 +8,11 @@ const expressSession = require("express-session");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
 
-const env = require("dotenv").config();
-console.log(env);
+const ApolloServer = require("apollo-server-express").ApolloServer;
+const resolvers = require("./server/resolvers.graphql");
+const typeDefs = require("./server/schema.graphql");
+
+require("dotenv").config();
 
 const httpPort = process.env.port || 5000;
 const httpsPort = process.env.port || 5443;
@@ -18,6 +21,13 @@ const baseApp = express();
 
 const key = fs.readFileSync("./CA/localhost/localhost.decrypted.key");
 const cert = fs.readFileSync("./CA/localhost/localhost.crt");
+
+const authRouter = require("./server/auth");
+
+const utkrishth = require("./server/utkrishth");
+
+const userRouter = require("./server/users");
+const { serializeUser } = require("passport");
 
 /**
  * Session Configuration (New!)
@@ -63,7 +73,13 @@ const strategy = new Auth0Strategy(
  *  App Configuration
  */
 
-const utkrishth = require("./server/utkrishth");
+const secured = (req, res, next) => {
+  if (req.user) {
+    return next();
+  }
+  req.session.returnTo = req.originalUrl;
+  res.redirect("/callback/login");
+};
 
 baseApp.set("view engine", "html");
 baseApp.engine("html", require("ejs").renderFile);
@@ -85,18 +101,33 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
+baseApp.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated();
+  next();
+});
+
 baseApp.use("/utkrishth", utkrishth);
+baseApp.use("/api/users", userRouter);
 
 baseApp.get("*", (req, res, next) => {
   res.render(__dirname + "/client/dist/index");
 });
 
-const server = https.createServer({ key, cert }, baseApp);
+https.globalAgent.options.rejectUnauthorized = false;
 
-baseApp.listen(httpPort, () => {
-  console.log(`Server is listening on https://localhost:${httpPort}`);
-});
+const server = https.createServer({ key, cert }, baseApp);
+let apolloServer = null;
+async function startServer() {
+  apolloServer = new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
+  await apolloServer.start();
+  apolloServer.applyMiddleware({ app: baseApp });
+}
+startServer();
 
 server.listen(httpsPort, () => {
   console.log(`Server is listening on https://localhost:${httpsPort}`);
+  console.log(`Server is listening on ${apolloServer.graphqlPath}`);
 });
