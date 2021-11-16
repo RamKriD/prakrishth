@@ -159,7 +159,7 @@ export default function Header(props) {
       <MenuItem
         sx={{ ":hover": { textDecoration: "underline" } }}
         onClick={() => {
-          logout({ returnTo: "http://localhost:5000" });
+          logout({ returnTo: "https://localhost:5443" });
         }}
       >
         Sign out
@@ -189,7 +189,9 @@ export default function Header(props) {
       </MenuItem>
       <MenuItem
         sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={() => loginWithRedirect({ screen_hint: 'signup', prompt:'login' })}
+        onClick={() =>
+          loginWithRedirect({ screen_hint: "signup", prompt: "login" })
+        }
       >
         Sign Up
       </MenuItem>
