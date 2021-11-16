@@ -28,7 +28,7 @@
     "@ckeditor/ckeditor5-image": "^31.0.0",
     "@ckeditor/ckeditor5-link": "^31.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.3",
-    "@emotion/react": "^11.5.0",
+    "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.1.0",
     "@mui/material": "^5.0.4",
