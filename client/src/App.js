@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useLocation,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 
 import LandingPage from "./layout/landing/LandingPage";
@@ -30,24 +24,32 @@ function NoMatch() {
 function App() {
   return (
     <Box sx={{ display: "flex" }}>
-      <Router>
+      <BrowserRouter>
         <Header />
         <Box component="main" sx={{ flexGrow: 1, p: 3, mt: "48px" }}>
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
+          <Routes>
+            <Route exact path="/" element={<LandingPage animate={true} />} />
             <Route
               exact
               path="/prakrishth"
-              render={() => <Redirect to="/" />}
+              element={<LandingPage animate={true} />}
             />
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/account" component={Account} />
-            <Route exact path="/shashtrarth" component={Shashtrarth} />
-            <Route exact path="/utkrishth" component={Utkrishth} />
-            <Route path="*" component={NoMatch} />
-          </Switch>
+            <Route exact path="/profile" element={<Profile animate={true} />} />
+            <Route exact path="/account" element={<Account animate={true} />} />
+            <Route
+              exact
+              path="/shashtrarth"
+              element={<Shashtrarth animate={true} />}
+            />
+            <Route
+              exact
+              path="/utkrishth"
+              element={<Utkrishth animate={true} />}
+            />
+            <Route path="*" element={<NoMatch animate={true} />} />
+          </Routes>
         </Box>
-      </Router>
+      </BrowserRouter>
     </Box>
   );
 }
