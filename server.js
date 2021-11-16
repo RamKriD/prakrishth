@@ -127,6 +127,13 @@ async function startServer() {
 }
 startServer();
 
+/*  HTTP Server Not Required as or now. 
+    @TODO find a way to redirect from http to https
+*/
+// baseApp.listen(httpPort, () => {
+//   console.log(`Server is listening on https://localhost:${httpPort}`);
+// })
+
 server.listen(httpsPort, () => {
   console.log(`Server is listening on https://localhost:${httpsPort}`);
   console.log(`Server is listening on ${apolloServer.graphqlPath}`);
