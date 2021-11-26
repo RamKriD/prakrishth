@@ -33,7 +33,7 @@
     "@mui/icons-material": "^5.1.0",
     "@mui/material": "^5.0.4",
     "@mui/styled-engine-sc": "^5.0.3",
-    "@mui/styles": "^5.0.1",
+    "@mui/styles": "^5.2.1",
     "apollo-server-express": "^3.5.0",
     "ckeditor-custom-build": "file:./ckeditor",
     "express": "^4.17.1",
