@@ -1,64 +1,23 @@
 import React, { Fragment } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 
-import client from "./../../services/dataService";
+import UserContext from "../../services/UserContext";
 
 function LandingPage(props) {
-  const {
-    user,
-    isAuthenticated,
-    isLoading,
-    getAccessTokenSilently,
-    getAccessTokenWithPopup,
-    getIdTokenClaims,
-  } = useAuth0();
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
-  if (isAuthenticated) {
-    console.log(user);
-    client
-      .post("/users/activeUser", {
-        data: {
-          query: `
-          query PostsForAuthor {
-            author(id: 1) {
-              firstName
-                posts {
-                  title
-                  votes
-                }
-              }
-            }
-          `,
-        },
-      })
-      .then((result) => {
-        console.log(result.data);
-      });
-    getAccessTokenSilently().then(
-      function (data) {
-        console.log("accessToken");
-        console.log(data);
-      },
-      function (error) {
-        console.log(error);
-      }
-    );
-    getIdTokenClaims().then(
-      function (data) {
-        console.log("getIdTokenClaims");
-        console.log(data);
-      },
-      function (error) {
-        console.log(error);
-      }
-    );
-    return <Fragment>Authenticated</Fragment>;
-  }
+  const user = React.useContext(UserContext).user;
+  console.log(user)
   return (
     <Fragment>
       <h3>Prakrishth</h3>
+      {user ? (
+        <Fragment>
+          <div>User Profile</div>
+          <div>
+            <img src={user.picture} alt={user.nickname} />
+          </div>
+          <h2>{user.nickname}</h2>
+          <p>{user.emails[0].value}</p>
+        </Fragment>
+      ) : null}
       Lorem Ipsum "Neque porro quisquam est qui dolorem ipsum quia dolor sit
       amet, consectetur, adipisci velit..." "ऐसा कोई नहीं है जो खुद दर्द को
       प्यार करता हो, जो ऐसा करने के पीछे हो और चाहता हो, बस क्योकि यह दर्द होता

@@ -2,25 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import { Auth0Provider } from "@auth0/auth0-react";
 
 import "./index.scss";
 
-import App from "./App";
-
 import theme from "./theme";
+
+import App from "./App";
+import { UserContextProvider } from "./services/UserContext";
+
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Auth0Provider
-        domain="dev-otfvck2m.us.auth0.com"
-        clientId="Sgs9rD6YUgLbwXJamlYDGJ0dPovjgV7z"
-        redirectUri={window.location.origin}
-      >
+      <UserContextProvider>
         <App />
-      </Auth0Provider>
+      </UserContextProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

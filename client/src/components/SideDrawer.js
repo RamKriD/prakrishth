@@ -59,6 +59,20 @@ function SideDrawer(props) {
           </ListItem>
         ))}
       </List>
+      <DrawerHeader
+        sx={{
+          backgroundColor: "#FF9933",
+          backgroundImage: "none",
+          color: "#000",
+          width: props.isOpen ? "240px" : "",
+          position: "absolute",
+          bottom: "0"
+        }}
+      >
+        <IconButton onClick={() => props.onClose()}>
+          <ChevronLeftIcon />
+        </IconButton>
+      </DrawerHeader>
     </Fragment>
   );
   return (

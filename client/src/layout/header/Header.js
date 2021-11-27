@@ -14,17 +14,16 @@ import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { useAuth0 } from "@auth0/auth0-react";
 import SideDrawer from "../../components/SideDrawer";
+import MuiLink from "@mui/material/Link";
 
 import { Link } from "react-router-dom";
 
 import ScrollTop from "../../components/ScrollTop";
+import UserContext from "../../services/UserContext";
 
 export default function Header(props) {
-  const { loginWithRedirect } = useAuth0();
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  const { logout } = useAuth0();
+  const user = React.useContext(UserContext).user;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -56,7 +55,7 @@ export default function Header(props) {
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = isAuthenticated ? (
+  const renderMenu = user ? (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -89,12 +88,11 @@ export default function Header(props) {
         My account
       </MenuItem>
       <MenuItem
-        sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={() => {
-          logout({ returnTo: "https://localhost:5443" });
-        }}
+        sx={{ ":hover": { textDecoration: "underline" }, color: "white" }}
       >
-        Sign out
+        <MuiLink href="/logout" color="inherit">
+          {"Sign Out"}
+        </MuiLink>
       </MenuItem>
     </Menu>
   ) : (
@@ -114,18 +112,11 @@ export default function Header(props) {
       onClose={handleMenuClose}
     >
       <MenuItem
-        sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={() => loginWithRedirect()}
+        sx={{ ":hover": { textDecoration: "underline" }, color: "white" }}
       >
-        Sign In
-      </MenuItem>
-      <MenuItem
-        sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={() =>
-          loginWithRedirect({ screen_hint: "signup", prompt: "login" })
-        }
-      >
-        Sign Up
+        <MuiLink href="/login" color="inherit">
+          {"Sign In/Register"}
+        </MuiLink>
       </MenuItem>
     </Menu>
   );
@@ -189,7 +180,7 @@ export default function Header(props) {
         sx={{
           backgroundColor: "#FF9933",
           backgroundImage: "none",
-          color: "#000"
+          color: "#000",
         }}
       >
         <Toolbar>

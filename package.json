@@ -8,7 +8,8 @@
     "dev": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --config webpack.dev.js --watch",
-    "start": "node ./server.js"
+    "start": "node ./server.js",
+    "startDev": "nodemon --watch server ./server.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,6 @@
   },
   "homepage": "https://github.com/RamKriD/prakrishth#readme",
   "dependencies": {
-    "@auth0/auth0-react": "^1.8.0",
     "@ckeditor/ckeditor5-autoformat": "^31.0.0",
     "@ckeditor/ckeditor5-build-classic": "^31.0.0",
     "@ckeditor/ckeditor5-build-inline": "^31.0.0",
@@ -35,6 +35,7 @@
     "@mui/styled-engine-sc": "^5.0.3",
     "@mui/styles": "^5.0.1",
     "apollo-server-express": "^3.5.0",
+    "axios": "^0.24.0",
     "ckeditor-custom-build": "file:./ckeditor",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
