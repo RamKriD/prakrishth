@@ -13,7 +13,8 @@ module.exports = (grunt) => {
       buildDev: "npm run dev",
       buildProd: "npm run build",
       buildUIWatch: "npm run watch",
-      serveDev: "npm run start",
+      serve: "npm run start",
+      serveDev: "npm run startDev"
     },
     clean: {
       dist: ["./client/dist"],
@@ -28,11 +29,11 @@ module.exports = (grunt) => {
     }
   });
 
-  grunt.registerTask("serveDev", () => {
+  grunt.registerTask("serve", () => {
     if (envConfig.NODE_ENV === "development") {
       grunt.task.run(["exec:serveDev"]);
     } else {
-      console.log("Dev Server can run only in development environment");
+      grunt.task.run(["exec:serve"]);
     }
   });
 

@@ -3,11 +3,9 @@ import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import Zoom from "@mui/material/Zoom";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,55 +14,16 @@ import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import { useAuth0 } from "@auth0/auth0-react";
+import SideDrawer from "../../components/SideDrawer";
+import MuiLink from "@mui/material/Link";
 
 import { Link } from "react-router-dom";
 
-const drawerWidth = 240;
-
-function ScrollTop(props) {
-  const { children, window } = props;
-  const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
-    disableHysteresis: true,
-    threshold: 100,
-  });
-
-  const handleClick = (event) => {
-    const anchor = (event.target.ownerDocument || document).querySelector(
-      "#back-to-top-anchor"
-    );
-
-    if (anchor) {
-      anchor.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  };
-
-  return (
-    <Zoom in={trigger}>
-      <Box
-        onClick={handleClick}
-        role="presentation"
-        sx={{ position: "fixed", bottom: 16, right: 16 }}
-      >
-        {children}
-      </Box>
-    </Zoom>
-  );
-}
+import ScrollTop from "../../components/ScrollTop";
+import UserContext from "../../services/UserContext";
 
 export default function Header(props) {
-  const { loginWithRedirect } = useAuth0();
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  const { logout } = useAuth0();
+  const user = React.useContext(UserContext).user;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -89,42 +48,14 @@ export default function Header(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const drawer = (
-    <div>
-      <Toolbar
-        sx={{
-          backgroundColor: "#FF9933",
-        }}
-      />
-      <Divider />
-      <List>
-        {["Prakrishth", "Utkrishth", "Shashtrarth"].map((text, index) => (
-          <ListItem
-            button
-            key={index}
-            component={Link}
-            to={"/" + text.toLowerCase()}
-            sx={{ ":hover": { textDecoration: "underline" } }}
-          >
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
   const menuId = "primary-search-account-menu";
-  const renderMenu = isAuthenticated ? (
+  const renderMenu = user ? (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -157,12 +88,11 @@ export default function Header(props) {
         My account
       </MenuItem>
       <MenuItem
-        sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={() => {
-          logout({ returnTo: "https://localhost:5443" });
-        }}
+        sx={{ ":hover": { textDecoration: "underline" }, color: "white" }}
       >
-        Sign out
+        <MuiLink href="/logout" color="inherit">
+          {"Sign Out"}
+        </MuiLink>
       </MenuItem>
     </Menu>
   ) : (
@@ -182,18 +112,11 @@ export default function Header(props) {
       onClose={handleMenuClose}
     >
       <MenuItem
-        sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={() => loginWithRedirect()}
+        sx={{ ":hover": { textDecoration: "underline" }, color: "white" }}
       >
-        Sign In
-      </MenuItem>
-      <MenuItem
-        sx={{ ":hover": { textDecoration: "underline" } }}
-        onClick={() =>
-          loginWithRedirect({ screen_hint: "signup", prompt: "login" })
-        }
-      >
-        Sign Up
+        <MuiLink href="/login" color="inherit">
+          {"Sign In/Register"}
+        </MuiLink>
       </MenuItem>
     </Menu>
   );
@@ -252,12 +175,12 @@ export default function Header(props) {
   return (
     <Fragment>
       <AppBar
+        position="fixed"
+        open={mobileOpen}
         sx={{
           backgroundColor: "#FF9933",
           backgroundImage: "none",
           color: "#000",
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          ml: { md: `${drawerWidth}px` },
         }}
       >
         <Toolbar>
@@ -266,7 +189,7 @@ export default function Header(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { md: "none" } }}
+            sx={{ mr: 2, display: { md: "block" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -331,44 +254,8 @@ export default function Header(props) {
       </Box>
       {renderMobileMenu}
       {renderMenu}
-      <Box
-        component="nav"
-        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "block", md: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "none", md: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-              border: "none",
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
+      <Box component="nav" aria-label="Applications">
+        <SideDrawer isOpen={mobileOpen} onClose={handleDrawerToggle} />
       </Box>
       <ScrollTop {...props}>
         <Fab color="secondary" size="small" aria-label="scroll back to top">

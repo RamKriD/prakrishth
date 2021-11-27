@@ -1,7 +1,6 @@
 const express = require("express");
 const fs = require("fs");
 
-const path = require("path");
 const https = require("https");
 
 const expressSession = require("express-session");
@@ -14,7 +13,6 @@ const typeDefs = require("./server/schema.graphql");
 
 require("dotenv").config();
 
-const httpPort = process.env.port || 5000;
 const httpsPort = process.env.port || 5443;
 
 const baseApp = express();
@@ -24,15 +22,12 @@ const cert = fs.readFileSync("./CA/localhost/localhost.crt");
 
 const authRouter = require("./server/auth");
 
-const utkrishth = require("./server/utkrishth");
 
 const userRouter = require("./server/users");
-const { serializeUser } = require("passport");
 
 /**
  * Session Configuration (New!)
  */
-
 const session = {
   secret: process.env.SESSION_SECRET,
   cookie: {},
@@ -48,13 +43,12 @@ session.cookie.secure = true;
 /**
  * Passport Configuration (New!)
  */
-
 const strategy = new Auth0Strategy(
   {
     domain: process.env.AUTH0_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
-    callbackURL: process.env.AUTH0_CALLBACK_URL,
+    callbackURL: process.env.AUTH0_CALLBACK_URL
   },
   function (accessToken, refreshToken, extraParams, profile, done) {
     /**
@@ -78,7 +72,7 @@ const secured = (req, res, next) => {
     return next();
   }
   req.session.returnTo = req.originalUrl;
-  res.redirect("/callback/login");
+  res.redirect("/login");
 };
 
 baseApp.set("view engine", "html");
@@ -102,18 +96,17 @@ passport.deserializeUser((user, done) => {
 });
 
 baseApp.use((req, res, next) => {
+  console.log(req.socket.localAddress)
+  console.log(req.socket.address())
   res.locals.isAuthenticated = req.isAuthenticated();
   next();
 });
 
-baseApp.use("/utkrishth", utkrishth);
+baseApp.use("/", authRouter);
 baseApp.use("/api/users", userRouter);
-
 baseApp.get("*", (req, res, next) => {
   res.render(__dirname + "/client/dist/index");
 });
-
-https.globalAgent.options.rejectUnauthorized = false;
 
 const server = https.createServer({ key, cert }, baseApp);
 let apolloServer = null;
@@ -128,7 +121,7 @@ async function startServer() {
 startServer();
 
 /*  HTTP Server Not Required as or now. 
-    @TODO find a way to redirect from http to https
+    @TODO find a way to redirect from http to https Toto
 */
 // baseApp.listen(httpPort, () => {
 //   console.log(`Server is listening on https://localhost:${httpPort}`);

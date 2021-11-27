@@ -1,21 +1,25 @@
-import React, { Fragment } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import React, { Fragment, useContext } from "react";
+
+import UserContext from "../../services/UserContext";
 
 function Account(props) {
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
-  console.log(user);
+  const user = useContext(UserContext).user;
   return (
-    isAuthenticated && (
-      <Fragment>
-        My Account
-        <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-      </Fragment>
-    )
+    <Fragment>
+      <div>Account</div>
+
+      {user ? (
+        <Fragment>
+          <div>
+            <img src={user.picture} alt={user.nickname} />
+          </div>
+          <h2>{user.nickname}</h2>
+          <p>{user.emails[0].value}</p>
+        </Fragment>
+      ) : (
+        <Fragment>{"No User Signed in"}</Fragment>
+      )}
+    </Fragment>
   );
 }
 

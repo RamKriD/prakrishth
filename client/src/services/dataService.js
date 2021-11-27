@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 
 const baseURL = "https://localhost:5443/api/";
 
@@ -8,15 +7,18 @@ client.defaults.baseURL = baseURL;
 
 client.defaults.timeout = 3000;
 
-client.interceptors.response.use(function (response) {
-  // Any status code that lie within the range of 2xx cause this function to trigger
-  // Do something with response data
-  return response;
-}, function (error) {
-  // Any status codes that falls outside the range of 2xx cause this function to trigger
-  // Do something with response error
-  // @TODO add server error handling like 404 or 401
-  return Promise.reject(error);
-});
+client.interceptors.response.use(
+  function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response.data;
+  },
+  function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    // @TODO add server error handling like 404 or 401
+    return Promise.reject(error);
+  }
+);
 
 export default client;
