@@ -9,16 +9,18 @@ import theme from "./theme";
 
 import App from "./App";
 import { UserContextProvider } from "./services/UserContext";
-
+import { LocalizationProvider } from "./services/LocalizationContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <UserContextProvider>
-        <App />
-      </UserContextProvider>
-    </ThemeProvider>
+    <LocalizationProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <UserContextProvider>
+          <App />
+        </UserContextProvider>
+      </ThemeProvider>
+    </LocalizationProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

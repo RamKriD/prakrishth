@@ -9,6 +9,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Divider from "@mui/material/Divider";
 import { Link } from "react-router-dom";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import LocalizationContext from "../services/LocalizationContext";
 
 const drawerWidth = 240;
 
@@ -22,6 +23,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 function SideDrawer(props) {
+  const locales = React.useContext(LocalizationContext)
   const drawer = (
     <Fragment>
       <DrawerHeader
@@ -46,7 +48,7 @@ function SideDrawer(props) {
           width: props.isOpen ? "240px" : "",
         }}
       >
-        {["Prakrishth", "Utkrishth", "Shashtrarth"].map((text, index) => (
+        {[locales.strings.prakrshth, locales.strings.utkrshth, locales.strings.shashtrarth].map((text, index) => (
           <ListItem
             button
             key={index}

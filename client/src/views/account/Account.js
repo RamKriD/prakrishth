@@ -1,12 +1,14 @@
 import React, { Fragment, useContext } from "react";
 
 import UserContext from "../../services/UserContext";
+import LocalizationContext from "../../services/LocalizationContext";
 
 function Account(props) {
   const user = useContext(UserContext).user;
+  const locales = React.useContext(LocalizationContext)
   return (
     <Fragment>
-      <div>Account</div>
+      <div>{locales.strings.myAccount}</div>
 
       {user ? (
         <Fragment>
@@ -17,7 +19,7 @@ function Account(props) {
           <p>{user.emails[0].value}</p>
         </Fragment>
       ) : (
-        <Fragment>{"No User Signed in"}</Fragment>
+        <Fragment>{locales.strings.noUser}</Fragment>
       )}
     </Fragment>
   );

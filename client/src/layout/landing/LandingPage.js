@@ -1,13 +1,14 @@
 import React, { Fragment } from "react";
 
 import UserContext from "../../services/UserContext";
+import LocalizationContext from "../../services/LocalizationContext";
 
 function LandingPage(props) {
   const user = React.useContext(UserContext).user;
-  console.log(user)
+  const locales = React.useContext(LocalizationContext)
   return (
     <Fragment>
-      <h3>Prakrishth</h3>
+      <h3>{locales.strings.prakrshth}</h3>
       {user ? (
         <Fragment>
           <div>User Profile</div>
