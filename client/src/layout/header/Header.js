@@ -16,23 +16,41 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import SideDrawer from "../../components/SideDrawer";
 import MuiLink from "@mui/material/Link";
+import LanguageIcon from "@mui/icons-material/Language";
 
 import { Link } from "react-router-dom";
 
 import ScrollTop from "../../components/ScrollTop";
 import UserContext from "../../services/UserContext";
+import LocalizationContext from "../../services/LocalizationContext";
 
 export default function Header(props) {
   const user = React.useContext(UserContext).user;
+  const locales = React.useContext(LocalizationContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [languageAnchorEl, setLanguageAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isLangMenuOpen = Boolean(languageAnchorEl);
+
+  const availableLanguages = locales.strings.getAvailableLanguages();
+  console.log(availableLanguages);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleLanguageMenuOpen = (event) => {
+    setLanguageAnchorEl(event.currentTarget);
+  };
+  const handleLanguageMenuClose = (event, lang) => {
+    if (lang) {
+      locales.setLanguage(lang);
+    }
+    setLanguageAnchorEl(null);
   };
 
   const handleMobileMenuClose = () => {
@@ -55,6 +73,7 @@ export default function Header(props) {
   };
 
   const menuId = "primary-search-account-menu";
+  const langId = "languageId";
   const renderMenu = user ? (
     <Menu
       anchorEl={anchorEl}
@@ -77,7 +96,7 @@ export default function Header(props) {
         sx={{ ":hover": { textDecoration: "underline" } }}
         onClick={handleMenuClose}
       >
-        Profile
+        {locales.strings.profile}
       </MenuItem>
       <MenuItem
         component={Link}
@@ -85,13 +104,13 @@ export default function Header(props) {
         sx={{ ":hover": { textDecoration: "underline" } }}
         onClick={handleMenuClose}
       >
-        My account
+        {locales.strings.myAccount}
       </MenuItem>
       <MenuItem
         sx={{ ":hover": { textDecoration: "underline" }, color: "white" }}
       >
         <MuiLink href="/logout" color="inherit">
-          {"Sign Out"}
+          {locales.strings.signOut}
         </MuiLink>
       </MenuItem>
     </Menu>
@@ -115,9 +134,34 @@ export default function Header(props) {
         sx={{ ":hover": { textDecoration: "underline" }, color: "white" }}
       >
         <MuiLink href="/login" color="inherit">
-          {"Sign In/Register"}
+          {locales.strings.signIn}
         </MuiLink>
       </MenuItem>
+    </Menu>
+  );
+  const renderLanguageButton = (
+    <Menu
+      anchorEl={languageAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={langId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isLangMenuOpen}
+      onClose={(event) => handleLanguageMenuClose(event, null)}
+    >
+      {availableLanguages.map((lang, index) => (
+        <MenuItem key={index} onClick={(event) => handleLanguageMenuClose(event, lang)}>
+          <div>
+            {index} : {lang}
+          </div>
+        </MenuItem>
+      ))}
     </Menu>
   );
 
@@ -138,13 +182,25 @@ export default function Header(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      <MenuItem onClick={handleLanguageMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="change language"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <LanguageIcon />
+        </IconButton>
+        <p>{locales.strings.language}</p>
+      </MenuItem>
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>{locales.strings.messages}</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -156,7 +212,7 @@ export default function Header(props) {
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>{locales.strings.notifications}</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -168,7 +224,7 @@ export default function Header(props) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>{locales.strings.profile}</p>
       </MenuItem>
     </Menu>
   );
@@ -200,11 +256,22 @@ export default function Header(props) {
             sx={{ flexGrow: 1, textAlign: "right" }}
           >
             <IconButton component={Link} to="/" sx={{ color: "#000" }}>
-              Prakrishth
+              {locales.strings.prakrshth}
             </IconButton>
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="change language"
+              aria-controls={langId}
+              aria-haspopup="true"
+              onClick={handleLanguageMenuOpen}
+              color="inherit"
+            >
+              <LanguageIcon />
+            </IconButton>
             <IconButton
               size="large"
               aria-label="show 4 new mails"
@@ -254,6 +321,7 @@ export default function Header(props) {
       </Box>
       {renderMobileMenu}
       {renderMenu}
+      {renderLanguageButton}
       <Box component="nav" aria-label="Applications">
         <SideDrawer isOpen={mobileOpen} onClose={handleDrawerToggle} />
       </Box>

@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import { Link as ReactLink } from "react-router-dom";
+import LocalizationContext from "../../services/LocalizationContext";
 
 function Copyright() {
+  const locales = useContext(LocalizationContext)
   return (
     <Typography variant="body2" color="text.secondary">
       {"Copyright © "}
       <Link color="inherit" component={ReactLink} to="/">
-        Prakrishth
+        {locales.strings.prakrshth}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

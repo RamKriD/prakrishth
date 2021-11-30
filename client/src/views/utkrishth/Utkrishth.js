@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
+import LocalizationContext from "../../services/LocalizationContext";
 
 function Utkrishth(props) {
-  
+  const locales = React.useContext(LocalizationContext)
   return (
     <Fragment>
-      <h4>Utkrishth</h4>
+      <h4>{locales.strings.utkrshth}</h4>
     </Fragment>
   );
 }
