@@ -5,7 +5,7 @@ function Utkrishth(props) {
   const locales = React.useContext(LocalizationContext)
   return (
     <Fragment>
-      <h4>{locales.strings.utkrshth}</h4>
+      <h4>{locales.strings.utkrishth}</h4>
     </Fragment>
   );
 }

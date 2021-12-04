@@ -23,7 +23,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 function SideDrawer(props) {
-  const locales = React.useContext(LocalizationContext)
+  const locales = React.useContext(LocalizationContext);
   const drawer = (
     <Fragment>
       <DrawerHeader
@@ -48,18 +48,36 @@ function SideDrawer(props) {
           width: props.isOpen ? "240px" : "",
         }}
       >
-        {[locales.strings.prakrshth, locales.strings.utkrshth, locales.strings.shashtrarth].map((text, index) => (
-          <ListItem
-            button
-            key={index}
-            component={Link}
-            to={"/" + text.toLowerCase()}
-            sx={{ ":hover": { textDecoration: "underline" } }}
-            onClick={() => props.onClose()}
-          >
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem
+          button
+          key={index}
+          component={Link}
+          to={"/prakrishth"}
+          sx={{ ":hover": { textDecoration: "underline" } }}
+          onClick={() => props.onClose()}
+        >
+          <ListItemText primary={locales.strings.prakrishth} />
+        </ListItem>
+        <ListItem
+          button
+          key={index}
+          component={Link}
+          to={"/utkrishth"}
+          sx={{ ":hover": { textDecoration: "underline" } }}
+          onClick={() => props.onClose()}
+        >
+          <ListItemText primary={locales.strings.utkrishth} />
+        </ListItem>
+        <ListItem
+          button
+          key={index}
+          component={Link}
+          to={"/shashtrarth"}
+          sx={{ ":hover": { textDecoration: "underline" } }}
+          onClick={() => props.onClose()}
+        >
+          <ListItemText primary={locales.strings.shashtrarth} />
+        </ListItem>
       </List>
       <DrawerHeader
         sx={{
@@ -68,7 +86,7 @@ function SideDrawer(props) {
           color: "#000",
           width: props.isOpen ? "240px" : "",
           position: "absolute",
-          bottom: "0"
+          bottom: "0",
         }}
       >
         <IconButton onClick={() => props.onClose()}>

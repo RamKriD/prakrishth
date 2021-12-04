@@ -256,7 +256,7 @@ export default function Header(props) {
             sx={{ flexGrow: 1, textAlign: "right" }}
           >
             <IconButton component={Link} to="/" sx={{ color: "#000" }}>
-              {locales.strings.prakrshth}
+              {locales.strings.prakrishth}
             </IconButton>
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
