@@ -12,7 +12,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary">
       {"Copyright © "}
       <Link color="inherit" component={ReactLink} to="/">
-        {locales.strings.prakrshth}
+        {locales.strings.prakrishth}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

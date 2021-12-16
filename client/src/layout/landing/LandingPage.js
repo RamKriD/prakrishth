@@ -8,7 +8,7 @@ function LandingPage(props) {
   const locales = React.useContext(LocalizationContext)
   return (
     <Fragment>
-      <h3>{locales.strings.prakrshth}</h3>
+      <h3>{locales.strings.prakrishth}</h3>
       {user ? (
         <Fragment>
           <div>User Profile</div>
