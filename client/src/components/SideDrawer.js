@@ -50,7 +50,6 @@ function SideDrawer(props) {
       >
         <ListItem
           button
-          key={index}
           component={Link}
           to={"/prakrishth"}
           sx={{ ":hover": { textDecoration: "underline" } }}
@@ -60,7 +59,6 @@ function SideDrawer(props) {
         </ListItem>
         <ListItem
           button
-          key={index}
           component={Link}
           to={"/utkrishth"}
           sx={{ ":hover": { textDecoration: "underline" } }}
@@ -70,7 +68,6 @@ function SideDrawer(props) {
         </ListItem>
         <ListItem
           button
-          key={index}
           component={Link}
           to={"/shashtrarth"}
           sx={{ ":hover": { textDecoration: "underline" } }}
