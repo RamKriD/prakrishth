@@ -158,7 +158,7 @@ export default function Header(props) {
       {availableLanguages.map((lang, index) => (
         <MenuItem key={index} onClick={(event) => handleLanguageMenuClose(event, lang)}>
           <div>
-            {index} : {lang}
+            {locales.strings[lang]}
           </div>
         </MenuItem>
       ))}

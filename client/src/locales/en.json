@@ -10,5 +10,7 @@
   "messages": "Messages",
   "notifications": "Notifications",
   "noUser": "No user is signed in",
-  "language": "Language"
+  "language": "Language",
+  "hi": "हिन्दी",
+  "en": "English"
 }

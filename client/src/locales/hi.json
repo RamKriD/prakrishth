@@ -10,5 +10,7 @@
   "messages": "संदेश",
   "notifications": "अधिसूचना",
   "noUser": "कोई उपयोगकर्ता साइन इन नहीं है",
-  "language": "भाषा"
+  "language": "भाषा",
+  "hi": "हिन्दी",
+  "en": "English"
 }
