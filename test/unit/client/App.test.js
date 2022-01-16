@@ -1,6 +1,6 @@
 import React from "react";
 import { screen, render, cleanup, fireEvent } from "@testing-library/react";
-import App from "./App";
+import App from "../../../client/src/App";
 
 describe("App component", () => {
   beforeAll(() => {
@@ -10,7 +10,7 @@ describe("App component", () => {
   test("should have the right message in the dom", () => {
     const message = "Prakrishth";
 
-    expect(screen.getByText(message)).toBeInTheDocument();
+    expect(screen.getAllByText(message)).toBeTruthy();
   });
 
   afterAll(cleanup);
