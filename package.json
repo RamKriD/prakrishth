@@ -5,6 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
+    "testCoverage": "jest --coverage",
+    "testFile": "jest -- ",
     "dev": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --config webpack.dev.js --watch",
