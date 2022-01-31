@@ -79,7 +79,7 @@
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.4.7",
     "jsonpointer": ">=5.0.0",
-    "mini-css-extract-plugin": "^2.4.4",
+    "mini-css-extract-plugin": "^2.5.3",
     "nodemon-webpack-plugin": "^4.5.2",
     "regenerator-runtime": "^0.13.9",
     "sass": "^1.48.0",
