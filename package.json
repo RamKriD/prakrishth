@@ -56,10 +56,10 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
+    "@babel/cli": "^7.16.8",
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
-    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-react": "^7.16.7",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@types/node": "^17.0.8",
@@ -91,6 +91,6 @@
     "webpack-dev-middleware": "^5.2.1",
     "webpack-merge": "^5.8.0",
     "webpack-pwa-manifest": "^4.3.0",
-    "workbox-webpack-plugin": "^6.4.1"
+    "workbox-webpack-plugin": "^6.4.2"
   }
 }
