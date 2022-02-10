@@ -19,24 +19,31 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"PoppinsRegular"',
+    fontFamily: '"NotoSerifDevanagari", "NotoSansDevanagariRegular"',
+    fontWeightRegular: 400,
+    fontWeightBold: 600,
+    fontWeightLight: 200,
+    fontWeightMedium: 500,
     h1: {
-      fontFamily: '"PoppinsRegular"',
+      fontFamily: '"NotoSerifDevanagari", "NotoSansDevanagariRegular"',
+      fontWeight: 600
     },
     h2: {
-      fontFamily: '"PoppinsRegular"',
+      fontFamily: '"NotoSerifDevanagari", "NotoSansDevanagariRegular"',
+      fontWeight: 500
     },
     h3: {
-      fontFamily: '"PoppinsRegular"',
+      fontFamily: '"NotoSerifDevanagari", "NotoSansDevanagariRegular"',
+      fontWeight: 500
     },
     h4: {
-      fontFamily: '"PoppinsRegular"',
+      fontFamily: '"NotoSerifDevanagari", "NotoSansDevanagariRegular"',
     },
     h5: {
-      fontFamily: '"PoppinsRegular"',
+      fontFamily: '"NotoSerifDevanagari", "NotoSansDevanagariRegular"',
     },
     h6: {
-      fontFamily: '"PoppinsRegular"',
+      fontFamily: '"NotoSerifDevanagari", "NotoSansDevanagariRegular"',
     },
   },
   props: {
