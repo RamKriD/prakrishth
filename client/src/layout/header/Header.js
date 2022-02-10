@@ -37,7 +37,7 @@ export default function Header(props) {
   const isLangMenuOpen = Boolean(languageAnchorEl);
 
   const availableLanguages = locales.strings.getAvailableLanguages();
-  console.log(availableLanguages);
+  // console.log(availableLanguages);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -185,7 +185,8 @@ export default function Header(props) {
       <MenuItem onClick={handleLanguageMenuOpen}>
         <IconButton
           size="large"
-          aria-label="change language"
+          role="language"
+          aria-label="Change Language"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
@@ -251,8 +252,8 @@ export default function Header(props) {
           </IconButton>
 
           <Typography
-            variant="h5"
-            component="div"
+            variant="h2"
+            component="h2"
             sx={{ flexGrow: 1, textAlign: "right" }}
           >
             <IconButton component={Link} to="/" sx={{ color: "#000" }}>
@@ -264,7 +265,8 @@ export default function Header(props) {
             <IconButton
               size="large"
               edge="end"
-              aria-label="change language"
+              role="language"
+              aria-label="Change Language"
               aria-controls={langId}
               aria-haspopup="true"
               onClick={handleLanguageMenuOpen}

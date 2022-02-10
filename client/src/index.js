@@ -25,16 +25,6 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-if (process.env.NODE_ENV !== "production") {
-  console.log("Looks like we are in development mode!");
-} else if (
-  window &&
-  typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object"
-) {
-  window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};
-  __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};
-}
-
 if (navigator && "serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -46,4 +36,14 @@ if (navigator && "serviceWorker" in navigator) {
         console.log("SW registration failed: ", registrationError);
       });
   });
+}
+
+if (process.env.NODE_ENV !== "production") {
+  console.log("Looks like we are in development mode!");
+} else if (
+  window &&
+  typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === "object"
+) {
+  window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};
+  __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};
 }

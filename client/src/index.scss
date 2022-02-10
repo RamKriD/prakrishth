@@ -1,10 +1,14 @@
-@use "./../public/css/fonts";
+@use "./../public/css/poppins";
 @use "./../public/css/colors";
+@use "./../public/css/halant";
+@use "./../public//css/tillana";
+@use "./../public/css/notoSansDevanagari";
+@use "./../public/css/notoSerifDevanagari";
 
 body {
   margin: 0;
   box-sizing: border-box;
-  font-family: "PoppinsRegular";
+  font-family: "NotoSansDevanagariRegular NotoSansDevanagariRegular ";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

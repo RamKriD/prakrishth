@@ -10,7 +10,7 @@
     "dev": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --config webpack.dev.js --watch",
-    "start": "node ./server.js",
+    "start": "set HTTPS=true && node ./server.js",
     "startDev": "nodemon --watch server ./server.js"
   },
   "repository": {

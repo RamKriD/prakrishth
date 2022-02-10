@@ -78,7 +78,7 @@ const secured = (req, res, next) => {
 baseApp.set("view engine", "html");
 baseApp.engine("html", require("ejs").renderFile);
 
-baseApp.use(express.static(__dirname + "/client/dist"));
+baseApp.use(express.static(__dirname + "/dist"));
 
 baseApp.use(expressSession(session));
 
@@ -105,8 +105,10 @@ baseApp.use((req, res, next) => {
 baseApp.use("/", authRouter);
 baseApp.use("/api/users", userRouter);
 baseApp.get("*", (req, res, next) => {
-  res.render(__dirname + "/client/dist/index");
+  res.render(__dirname + "/dist/index");
 });
+
+console.log(cert)
 
 const server = https.createServer({ key, cert }, baseApp);
 let apolloServer = null;
