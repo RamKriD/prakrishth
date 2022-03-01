@@ -44,7 +44,7 @@
     "marked": ">=4.0.12",
     "mongodb": "^4.4.0",
     "mongoose": "^6.2.3",
-    "node-gyp": "^8.4.1",
+    "node-gyp": "^9.0.0",
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-auth0": "^1.4.2",
