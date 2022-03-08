@@ -31,7 +31,7 @@
     "@mui/icons-material": "^5.4.4",
     "@mui/material": "^5.4.4",
     "@mui/styled-engine-sc": "^5.4.2",
-    "@mui/styles": "^5.4.4",
+    "@mui/styles": "^5.5.0",
     "@tinymce/tinymce-react": "^3.13.1",
     "apollo-server-express": "^3.6.3",
     "axios": "^0.26.0",
