@@ -34,7 +34,7 @@
     "@mui/styles": "^5.5.0",
     "@tinymce/tinymce-react": "^3.13.1",
     "apollo-server-express": "^3.6.3",
-    "axios": "^0.26.0",
+    "axios": "^0.26.1",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "g": "^2.0.1",
