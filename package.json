@@ -43,7 +43,7 @@
     "lodash": "^4.17.21",
     "marked": ">=4.0.12",
     "mongodb": "^4.4.1",
-    "mongoose": "^6.2.5",
+    "mongoose": "^6.2.6",
     "node-gyp": "^9.0.0",
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
