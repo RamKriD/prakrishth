@@ -76,7 +76,7 @@
     "grunt-contrib-clean": "^2.0.1",
     "grunt-exec": "^3.0.0",
     "html-webpack-plugin": "^5.5.0",
-    "jest": "^28.1.1",
+    "jest": "^28.1.2",
     "jsonpointer": ">=5.0.0",
     "mini-css-extract-plugin": "^2.6.1",
     "nodemon-webpack-plugin": "^4.8.0",
