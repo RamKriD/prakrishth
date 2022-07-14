@@ -42,7 +42,7 @@
     "https": "^1.0.0",
     "lodash": "^4.17.21",
     "marked": ">=4.0.18",
-    "mongodb": "^4.7.0",
+    "mongodb": "^4.8.0",
     "mongoose": "^6.4.4",
     "node-gyp": "^9.1.0",
     "nodemon": "^2.0.19",
