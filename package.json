@@ -30,7 +30,7 @@
     "@material-ui/icons": "^4.11.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.2",
-    "@mui/styled-engine-sc": "^5.8.0",
+    "@mui/styled-engine-sc": "^5.9.3",
     "@mui/styles": "^5.9.2",
     "@tinymce/tinymce-react": "^4.1.0",
     "apollo-server-express": "^3.10.0",
