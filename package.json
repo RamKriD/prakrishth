@@ -80,7 +80,7 @@
     "jsonpointer": ">=5.0.1",
     "mini-css-extract-plugin": "^2.7.2",
     "nodemon-webpack-plugin": "^4.8.1",
-    "regenerator-runtime": "^0.13.9",
+    "regenerator-runtime": "^0.13.11",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
