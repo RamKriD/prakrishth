@@ -71,7 +71,7 @@
     "brotli-webpack-plugin": "^1.1.0",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^4.2.2",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "grunt": "^1.6.1",
     "grunt-contrib-clean": "^2.0.1",
     "grunt-exec": "^3.0.0",
